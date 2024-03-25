@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:login_backend}/applogin/db.sqlite3",
+            "name": "admin"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
