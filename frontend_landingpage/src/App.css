@@ -130,3 +130,56 @@ button:active {
   justify-content: right;
   margin-top: 24px;
 }
+footer{
+  height: calc(220px - 32px);
+  padding-top: 32px;
+  background-color: #1f1f21;
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.separator{
+  width: 2px;
+  height: 77px;
+  background-color: rgba(255, 255, 255, 0.158);
+  margin: 52px;
+}
+.box-footer-data:first-child, .box-footer-data:last-child{
+  width: 328px;
+}
+.box-footer-data > ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.box-footer-data > ul > li > p{
+  margin-left: 18px;
+}
+.box-footer-data > ul > li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+.footer-img{
+  margin : 8px
+}
+.box-direccion{
+  display: inline !important;
+}
+.box-direccion > div{
+  display: flex;
+  align-items: center;
+}
+.footer-titulo{
+  font-size: 18px;
+  font-weight: 400;
+}
+.titulo-red-social{
+  font-size: 12px;
+  font-weight: 700;
+}
+.direccion{
+  font-size: 18px;
+  font-weight: 275;
+}

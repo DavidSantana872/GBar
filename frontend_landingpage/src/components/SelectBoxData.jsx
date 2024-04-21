@@ -10,8 +10,8 @@ const SelectBoxData = ({tituloSelect, dataOption}) => {
             <p className="box-titulo">
                 {tituloSelect}
             </p>
-            <select defaultValue={"default"} id={`select-${tituloSelect}`} ref={Status} name={tituloSelect}>
-                <option value="default" disabled>Seleccione</option>
+            <select required id={`select-${tituloSelect}`} ref={Status} name={tituloSelect}>
+            <option value="" disabled selected>Seleccione</option>
                 {
                     dataOption.map(
                         dOption => (

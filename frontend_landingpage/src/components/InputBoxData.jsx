@@ -10,7 +10,7 @@ const InputBoxData = ({tituloInput}) => {
             <p className="box-titulo">
                 {tituloInput}
             </p>
-            <input id={`input-${tituloInput}`} ref={Status} name={tituloInput} type={tituloInput == "Numero Telefonico" ? "number" : "text"} />
+            <input required id={`input-${tituloInput}`} ref={Status} name={tituloInput} type={tituloInput == "Numero Telefonico" ? "number" : "text"} />
         </div>
     )
 }
