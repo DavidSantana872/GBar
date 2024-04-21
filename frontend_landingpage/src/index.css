@@ -1,0 +1,29 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*{
+  border: none;
+  margin: 0px;
+}
+body{
+  border: solid violet 1px;
+  flex: 1 0 auto;
+}
+header{
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+}
+#ViewInicio{
+  padding-top: 64px;
+}
+a{
+  text-decoration: none;
+  color: var(--colorNegro);;
+}

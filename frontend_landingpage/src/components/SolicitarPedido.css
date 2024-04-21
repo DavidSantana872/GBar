@@ -1,0 +1,182 @@
+.ViewSolicitarPedido {
+  width: auto;
+
+  margin-left: 158px;
+  margin-right: 158px;
+  margin-bottom: 64px;
+}
+.titulo-solicitud {
+  color: #363636;
+  text-align: center;
+  font-family: "Kulim Park";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.24px;
+}
+.titulo-seccion {
+  color: #a1a1a1;
+  font-family: "Kulim Park";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.2px;
+  margin-bottom: 24px;
+}
+.inputs-information {
+  display: flex;
+  width: 822px;
+  justify-content: space-between;
+}
+.box-titulo {
+  color: #7e7e7e;
+  font-family: "Kulim Park";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.14px;
+  margin-left: 12px;
+  margin-top: 5px;
+
+  margin-bottom: 3px;
+}
+input, select{
+    margin-left: 12px;
+    border: none;
+    outline: none;
+    width: 90%;
+    font-size: 18px;
+    background-color: white;
+}
+
+
+.box-input {
+  border-radius: 10px;
+  border: 1px solid #efefef;
+  width: 291px;
+  height: 51px;
+  flex-shrink: 0;
+  margin-bottom: 28px;
+}
+.input-telefono {
+  width: 192px;
+}
+.box-select {
+  width: 211px;
+}
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 822px;
+  margin-top: 12px;
+}
+.btns > button {
+  height: 37px;
+  color: #fff;
+  text-align: center;
+  font-family: "Kulim Park";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.18px;
+  border-radius: 10px;
+}
+.btns > :first-child {
+  width: 171px;
+  background-color: red;
+  color: white;
+  margin-right: 24px;
+}
+.btns > :first-child:hover {
+  background-color: rgb(199, 0, 0);
+  color: rgb(255, 255, 255);
+  margin-right: 24px;
+}
+.btns > :last-child {
+  width: 118px;
+  color: #00ea33;
+  background-color: white;
+  border: solid 1px #00ea33;
+}
+.btns > :last-child:hover {
+  width: 118px;
+  color: white;
+  background-color: #00ea33;
+  border: solid 1px white;
+}
+.img-producto {
+  width: 181px;
+  height: 196px;
+  margin: 25px;
+  border: solid 1px green;
+}
+.box-column {
+  display: flex;
+  justify-content: space-between;
+}
+.box-input > :last-child {
+  color: rgba(0, 0, 0, 0.79);
+  font-family: "Kulim Park";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.18px;
+}
+
+table > thead > tr,
+table > tfoot > tr {
+  color: #363636;
+  font-family: "Kulim Park";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.18px;
+}
+
+table > thead > tr,
+tr:nth-child(even) {
+  background-color: #efefef;
+}
+table > tbody > tr {
+  color: #363636;
+  font-family: "Kulim Park";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.16px;
+}
+td {
+  width: 348px;
+  height: 33px;
+}
+.btn-enviar {
+  width: 140px;
+  height: 43px;
+  flex-shrink: 0;
+  background: #00aa25;
+  color: #fff;
+  font-family: "Kulim Park";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+}
+.btn-enviar > svg{
+    margin: 8px;
+}
+.btn-enviar:hover{
+    background-color: #02dd32;
+}

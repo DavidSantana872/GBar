@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Kulim+Park:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap");
+
+:root {
+  --colorNegro: #252525;
+  --colorNegroSombra: #25252546;
+}
+.Title {
+  font-family: "Kulim Park", sans-serif;
+  width: 686px;
+  height: 314px;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.FirstTitle {
+  font-weight: 700;
+  line-height: normal;
+  font-size: 116px;
+  letter-spacing: -1.16px;
+  background: linear-gradient(278deg, #00ff38 37.33%, #03330d 68.76%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0px;
+  padding: 0px;
+}
+.SecondTitle {
+  font-family: "Kulim Park", sans-serif;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  background: linear-gradient(249deg, #00a824 37.39%, #000 87.53%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 666px;
+  height: 109px;
+  position: relative;
+  top: -24px;
+}
+.ThirdTitle {
+  color: #989898;
+  font-family: "Kulim Park";
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 4.84px;
+  position: relative;
+  top: -24px;
+}
+.BarraNavegacion {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.BarraNavegacion > ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  margin: 18px;
+}
+.BarraNavegacion > ul > li {
+  width: 204px;
+  height: 28px;
+  text-align: center;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--colorNegro);
+  font-weight: bold;
+  text-shadow: 4px 4px 3px var(--colorNegroSombra);
+}
+.BackgroundDegradado {
+  width: 100%;
+  height: 809px;
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+  background-image: url("/Background.svg");
+  background-repeat: no-repeat;
+}
+.Inicio {
+  height: calc(100vh - (28px + (18px * 2)));
+  width: 100%;
+  display: flex;
+}
+.InicioBoxLeft {
+  margin-left: 155px;
+  margin-top: 168px;
+}
+.Burbuja {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 10rem;
+  position: relative;
+  border: 1px solid red;
+  background-image: linear-gradient(
+    rgba(0, 255, 55, 0),
+    rgba(9, 255, 0, 0.116)
+  );
+}
+.BrilloBurbuja {
+  background-color: #ffffff28;
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+.animacionBox {
+  border: solid 1px red;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: space-around;
+}
+button:active {
+  box-shadow: rgba(10, 10, 10, 0.589) 1px 1px 1px;
+}
+.box-btn-enviar {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  margin-top: 24px;
+}
