@@ -1,46 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./SolicitarPedido.css";
 import InputBoxData from "./InputBoxData";
 import SelectBoxData from "./SelectBoxData";
+import {
+  ApiProductosPedidosSolicitud,
+  ApiCargarImagenes,
+  ApiPacksProductos,
+} from "../apis/apis";
+import { counterContext } from "../context/counterContext";
 
-const PRODUCTOS = [
-  {
-    id: 1,
-    nombre: "Bebida de naranja",
-    tamanio: "100ml",
-  },
-  {
-    id: 2,
-    nombre: "Bebida de limon",
-    tamanio: "1 Litro",
-  },
-  {
-    id: 3,
-    nombre: "Bebida de uva",
-    tamanio: "800ml",
-  },
-];
-const PRESENTACIONES = [
-  {
-    id: 1,
-    nombre: "six pack",
-  },
-  {
-    id: 2,
-    nombre: "3L",
-  },
-  {
-    id: 3,
-    nombre: "100ml",
-  },
-];
 const SolicitarPedido = () => {
+  const { SourceImagen, IdEmpaquetado, setCantidadUnidad, CantidadUnidad } = useContext(counterContext);
+
+  const [ImagenURL, setImagenURL] = useState("");
+
+  const [Presentaciones, setPresentaciones] = useState([]);
+
   const [PedidoProductos, setPedidosProductos] = useState([]);
+  
+  const [ConteoUnidades, setConteoUnidades] = useState(0)
+
+
+  useEffect(() => {
+    let TemporalURL = `${ApiCargarImagenes.trim()}${SourceImagen.trim()}`;
+    TemporalURL = TemporalURL.replace(/ /g, "_");
+    console.log(TemporalURL);
+    setImagenURL(TemporalURL);
+
+    // SOLICITAR AHORA SUS PAQUETES Y PRESENTACIONES DEL PRODUCTO SELECCIONADO
+
+    let TemporalURL_ID_pack = `${ApiPacksProductos.trim()}/${IdEmpaquetado.trim()}`;
+  
+    fetch(TemporalURL_ID_pack, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPresentaciones([data]);
+        setCantidadUnidad(data.CANTIDAD)
+      });
+  }, [SourceImagen]);
+
+  const [Productos, SetProductos] = useState([]);
+  useEffect(() => {
+    fetch(ApiProductosPedidosSolicitud, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        SetProductos(data);
+      });
+  });
+
   const LimpiarPedido = () => {
     setPedidosProductos([]);
   };
   const AgregarProducto = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let Nombre = document.getElementById("select-Producto").value.split(",");
     console.log(Nombre);
     let Presentacion = document
@@ -52,9 +74,25 @@ const SolicitarPedido = () => {
       tamanio: Nombre[2],
       idPresentacion: Presentacion[0],
       nombrePresentacion: Presentacion[1],
+      cantidadPresentacion: Presentacion[2],
     };
     setPedidosProductos([...PedidoProductos, Data]);
   };
+  useEffect(
+    () => {
+      setConteoUnidades(TotalUnidadesPedido())
+    }, [PedidoProductos]
+  )
+  const TotalUnidadesPedido = () => {
+    let Contador = 0
+    PedidoProductos.map(
+      Pedido =>{
+        Contador = parseInt(Pedido.cantidadPresentacion) + parseInt(Contador)
+      }
+      
+    )
+    return Contador
+  }
   return (
     <section className="ViewSolicitarPedido" id="ViewPedidos">
       <p className="titulo-solicitud">Solicitud Pedido</p>
@@ -75,25 +113,34 @@ const SolicitarPedido = () => {
             <div className="inputs-information">
               <SelectBoxData
                 tituloSelect={"Producto"}
-                dataOption={PRODUCTOS}
+                dataOption={Productos}
+                ModoRenderizado="1"
+              ></SelectBoxData>
+
+              <SelectBoxData
+                tituloSelect={"Presentacion"}
+                dataOption={Presentaciones}
+                ModoRenderizado="2"
               ></SelectBoxData>
               
               <SelectBoxData
-                tituloSelect={"Presentacion"}
-                dataOption={PRESENTACIONES}
-              ></SelectBoxData>
-              <SelectBoxData
                 tituloSelect={"Unidades"}
-                dataOption={PRESENTACIONES}
-              ></SelectBoxData>
+                dataOption={[CantidadUnidad]}
+                ModoRenderizado="3"
+        ></SelectBoxData>
             </div>
           </form>
           <div className="btns">
             <button onClick={LimpiarPedido}>Limpiar Pedido</button>
-            <button form="PedidoForm" type="submit">Agregar</button>
+            <button form="PedidoForm" type="submit">
+              Agregar
+            </button>
           </div>
         </div>
-        <div className="img-producto"></div>
+        <div
+          className="img-producto"
+          style={{ backgroundImage: `url(${ImagenURL})` }}
+        ></div>
       </div>
       <section className="table-pedido">
         <p className="titulo-seccion">Resumen Pedido</p>
@@ -109,10 +156,10 @@ const SolicitarPedido = () => {
           <tbody>
             {PedidoProductos.map((producto) => (
               <tr>
-                <td>{producto.nombreProducto}</td>
-                <td>Tamaño</td>
+                <td>{producto.nombreProducto + " " + producto.nombreProducto}</td>
+                <td>{producto.tamanio}</td>
                 <td>{producto.nombrePresentacion}</td>
-                <td>Unidades</td>
+                <td>{producto.cantidadPresentacion}</td>
               </tr>
             ))}
           </tbody>
@@ -121,7 +168,7 @@ const SolicitarPedido = () => {
               <td></td>
               <td></td>
               <td>TOTAL</td>
-              <td>2000</td>
+              <td>{ConteoUnidades}</td>
             </tr>
           </tfoot>
         </table>

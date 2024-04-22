@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from .models import Product, Pack
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
+from django.core.exceptions import ObjectDoesNotExist
+
+
 # Create your views here.
 class Productos(APIView):
     def get(self, request):
@@ -62,13 +65,22 @@ class Productos(APIView):
 
 
 class Paquetes(APIView): 
-    def get(self, request):
-         # Obtener objetos del modelo
-        objetos = Pack.objects.all()
-        # Convertir objetos a diccionarios
-        datos = [model_to_dict(objeto) for objeto in objetos]
-        # Convertir a JSON
-        return JsonResponse(datos, safe=False)
+    def get(self, request, ID=None):
+        try:
+            if ID is not None:
+                # Intentar obtener el objeto específico
+                objeto = Pack.objects.get(pk=ID)
+                datos = model_to_dict(objeto)  # Convertir el objeto encontrado a diccionario
+            else:
+                # Obtener todos los objetos y convertirlos a lista de diccionarios
+                objetos = Pack.objects.all()
+                datos = [model_to_dict(objeto) for objeto in objetos]
+                
+            return JsonResponse(datos, safe=False)  # `safe=False` es necesario para listas de objetos
+        except ObjectDoesNotExist:
+            return JsonResponse({'error': 'Pack no encontrado'}, status=404)  # Manejo de error si no se encuentra el objeto
+
+
 
 
     def post(self, request): 

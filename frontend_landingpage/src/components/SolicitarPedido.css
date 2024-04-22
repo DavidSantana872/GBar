@@ -112,7 +112,10 @@ input, select{
   width: 181px;
   height: 196px;
   margin: 25px;
-  border: solid 1px green;
+  border: solid 1px rgba(121, 121, 121, 0.144);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .box-column {
   display: flex;

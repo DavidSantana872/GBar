@@ -61,5 +61,5 @@ class Product(models.Model):
     ID_PACK = models.ForeignKey(Pack, on_delete = models.CASCADE)
     SABOR = models.CharField(max_length = 30)
     CANTIDAD_DISPONIBLE = models.PositiveBigIntegerField()
-    IMAGEN = models.ImageField(upload_to= "media/image/")
+    IMAGEN = models.ImageField(upload_to= "image/")
     accion = Gestion()
