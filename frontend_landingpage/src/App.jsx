@@ -4,8 +4,8 @@ import anime from "animejs";
 import Carrusel from "./components/Carrusel";
 import SolicitarPedido from "./components/SolicitarPedido";
 function App() {
-  const MovimientoDesplazamiento = () => {
-    let DivElementos = document.getElementsByClassName("Burbuja");
+  const MovimientoDesplazamiento = (Burbuja) => {
+    let DivElementos = document.getElementsByClassName(Burbuja);
     DivElementos = Array.from(DivElementos);
     DivElementos.map((DivElemento) => {
       anime({
@@ -15,18 +15,61 @@ function App() {
            direction : "normal",
            */
         targets: DivElemento,
-        top: `${Math.random() * 100}%`,
+        top: `${0}%`,
         duration: 2500,
         direction: "normal",
-        easing: "easeInOutQuad",
+        easing: "linear",
+        complete: () => {
+          DivElemento.style.top = `${Math.random()  * (130 - 90) + 90}%`
+          anime({
+            targets: DivElemento,
+            opacity: 1,
+            duration: 10,  // Duración más corta para la opacidad
+            easing: "linear"
+          });
+          
+        }
+      });
+
+      // transparencia y desaparecer div 
+      anime({
+        targets: DivElemento,
+        opacity: 0,
+        duration: 1300,  // Duración más corta para la opacidad
+        easing: "linear"
       });
     });
   };
-  useEffect(() => {
-    setInterval(() => {
-      MovimientoDesplazamiento();
-    }, 2500);
-  }, []);
+
+useEffect(
+  () => {
+    MovimientoDesplazamiento("Burbuja")
+
+    setTimeout(() => {
+      MovimientoDesplazamiento("Burbuja2")
+    },1200)
+  }, []
+)
+
+useEffect(() => {
+  // Este es el ID del intervalo que queremos mantener y limpiar
+  const intervalId = setInterval(() => {
+    MovimientoDesplazamiento("Burbuja");
+
+    // Establece un timeout dentro del intervalo
+    const timeoutId = setTimeout(() => {
+      MovimientoDesplazamiento("Burbuja2");
+    }, 1200);
+
+    // Limpia el timeout al final del ciclo del intervalo
+    return () => clearTimeout(timeoutId);
+
+  }, 2600);
+
+  // Función de limpieza que React llamará cuando el componente se desmonte
+  return () => clearInterval(intervalId);
+
+}, []);  // Los corchetes vacíos aseguran que este efecto solo se ejecute una vez
 
   return (
     <>
@@ -34,7 +77,9 @@ function App() {
         <nav className="BarraNavegacion">
           <ul>
             <li>
-              <a href="#ViewInicio">Inicio</a>
+              <a onClick={() => {
+                MovimientoDesplazamiento()
+              }} href="#ViewInicio">Inicio</a>
             </li>
             <li>
               <a href="#ViewProductos">Productos</a>
@@ -68,7 +113,56 @@ function App() {
               zIndex: "-2",
             }}
           ></div>
-
+<section className="animacionBox">
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 1030 + 100)}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 1030 + 100)}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+            <div
+              className="Burbuja2"
+              style={{ top: `${Math.random() * (120 - 1030 + 100)}%` }}
+            >
+              <div className="BrilloBurbuja"></div>
+            </div>
+          </section>
           <section className="animacionBox">
             <div
               className="Burbuja"

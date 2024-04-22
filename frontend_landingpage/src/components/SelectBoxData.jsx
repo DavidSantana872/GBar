@@ -8,7 +8,7 @@ const SelectBoxData = ({ tituloSelect, dataOption, ModoRenderizado }) => {
     if (ModoRenderizado == "1") {
       return (
         <option
-          value={`${dOption.ID_PRODUCTO}, ${dOption.NOMBRE}, ${dOption.TAMANIO}, ${dOption.IMAGEN}, ${dOption.ID_PACK}`}
+          value={`${dOption.ID_PRODUCTO}, ${dOption.NOMBRE}, ${dOption.TAMANIO}, ${dOption.IMAGEN}, ${dOption.ID_PACK}, ${dOption.SABOR}`}
         >
           {dOption.NOMBRE + " " + dOption.SABOR + " " + dOption.TAMANIO}
         </option>
@@ -39,7 +39,7 @@ const SelectBoxData = ({ tituloSelect, dataOption, ModoRenderizado }) => {
 
   return (
     <div className="box-input box-select">
-      <p className="box-titulo">{tituloSelect}</p>
+      <p className="box-titulo">{tituloSelect.trim()}</p>
       <select
         required
         id={`select-${tituloSelect}`}

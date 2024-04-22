@@ -93,18 +93,39 @@
   margin-top: 168px;
 }
 .Burbuja {
-  width: 10rem;
-  height: 10rem;
+  width: 200px;
+  height: 200px;
+  flex: 1 0 auto;
   border-radius: 10rem;
   position: relative;
-  border: 1px solid red;
   background-image: linear-gradient(
-    rgba(0, 255, 55, 0),
-    rgba(9, 255, 0, 0.116)
+    rgba(0, 255, 234, 0.116),
+    rgba(173, 199, 224, 0.274)
   );
+  background: radial-gradient(circle at 30% 107%, #FFFFFF 0%, #C0F9FF 40%, #B5EFFC 70%, #E2FFFF 100%);
+   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), /* Sombra suave para profundidad */
+              inset 0px 0px 20px 5px rgba(255, 255, 255, 0.5); /* Brillo interno para efecto de luz */
+  opacity: 0.6;
+}
+
+.Burbuja2 {
+  width: 200px;
+  height: 200px;
+  flex: 1 0 auto;
+  border: 1px solid red;
+  border-radius: 10rem;
+  position: relative;
+  background-image: linear-gradient(
+    rgba(0, 255, 234, 0.116),
+    rgba(173, 199, 224, 0.274)
+  );
+  background: radial-gradient(circle at 30% 107%, #FFFFFF 0%, #C0F9FF 40%, #B5EFFC 70%, #E2FFFF 100%);
+   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), /* Sombra suave para profundidad */
+              inset 0px 0px 20px 5px rgba(255, 255, 255, 0.5); /* Brillo interno para efecto de luz */
+  opacity: 0.6;
 }
 .BrilloBurbuja {
-  background-color: #ffffff28;
+  background-color: #a9e0e43d;
   width: 40%;
   height: 40%;
   border-radius: 50%;
@@ -121,7 +142,7 @@
   display: flex;
   justify-content: space-around;
 }
-button:active {
+button:not(.btn-cambiar-productos):active{
   box-shadow: rgba(10, 10, 10, 0.589) 1px 1px 1px;
 }
 .box-btn-enviar {

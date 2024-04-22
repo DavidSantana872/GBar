@@ -27,12 +27,16 @@
 .btn-cambiar-productos {
   margin: 32px;
   background-color: white;
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.055);
 }
+
 .btn-cambiar-productos > img {
   filter: opacity(0.6);
 }
 .btn-cambiar-productos > img:hover {
   filter: opacity(1);
+  
 }
 .titulo{
     text-transform: uppercase;

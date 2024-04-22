@@ -10,6 +10,7 @@ import {
 import { counterContext } from "../context/counterContext";
 
 const SolicitarPedido = () => {
+
   const { SourceImagen, IdEmpaquetado, setCantidadUnidad, CantidadUnidad } = useContext(counterContext);
 
   const [ImagenURL, setImagenURL] = useState("");
@@ -17,9 +18,10 @@ const SolicitarPedido = () => {
   const [Presentaciones, setPresentaciones] = useState([]);
 
   const [PedidoProductos, setPedidosProductos] = useState([]);
-  
-  const [ConteoUnidades, setConteoUnidades] = useState(0)
 
+  const [ConteoUnidades, setConteoUnidades] = useState(0);
+
+  const [Productos, SetProductos] = useState([]);
 
   useEffect(() => {
     let TemporalURL = `${ApiCargarImagenes.trim()}${SourceImagen.trim()}`;
@@ -30,7 +32,7 @@ const SolicitarPedido = () => {
     // SOLICITAR AHORA SUS PAQUETES Y PRESENTACIONES DEL PRODUCTO SELECCIONADO
 
     let TemporalURL_ID_pack = `${ApiPacksProductos.trim()}/${IdEmpaquetado.trim()}`;
-  
+
     fetch(TemporalURL_ID_pack, {
       method: "GET",
       headers: {
@@ -40,11 +42,10 @@ const SolicitarPedido = () => {
       .then((response) => response.json())
       .then((data) => {
         setPresentaciones([data]);
-        setCantidadUnidad(data.CANTIDAD)
+        setCantidadUnidad(data.CANTIDAD);
       });
   }, [SourceImagen]);
 
-  const [Productos, SetProductos] = useState([]);
   useEffect(() => {
     fetch(ApiProductosPedidosSolicitud, {
       method: "GET",
@@ -58,9 +59,15 @@ const SolicitarPedido = () => {
       });
   });
 
+  useEffect(() => {
+    setConteoUnidades(TotalUnidadesPedido());
+  }, [PedidoProductos]);
+  
+
   const LimpiarPedido = () => {
     setPedidosProductos([]);
   };
+
   const AgregarProducto = (e) => {
     e.preventDefault();
     let Nombre = document.getElementById("select-Producto").value.split(",");
@@ -72,39 +79,43 @@ const SolicitarPedido = () => {
       idProducto: Nombre[0],
       nombreProducto: Nombre[1],
       tamanio: Nombre[2],
+      sabor: Nombre[5],
       idPresentacion: Presentacion[0],
       nombrePresentacion: Presentacion[1],
       cantidadPresentacion: Presentacion[2],
     };
     setPedidosProductos([...PedidoProductos, Data]);
   };
-  useEffect(
-    () => {
-      setConteoUnidades(TotalUnidadesPedido())
-    }, [PedidoProductos]
-  )
+
   const TotalUnidadesPedido = () => {
-    let Contador = 0
-    PedidoProductos.map(
-      Pedido =>{
-        Contador = parseInt(Pedido.cantidadPresentacion) + parseInt(Contador)
-      }
-      
-    )
-    return Contador
+    let Contador = 0;
+    PedidoProductos.map((Pedido) => {
+      Contador = parseInt(Pedido.cantidadPresentacion) + parseInt(Contador);
+    });
+    return Contador;
+  };
+
+  const EnviarPedido = (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.target);  // Usa el objeto FormData
+    const values = Object.fromEntries(formData.entries());  // Convierte FormData en un objeto de JavaScript
+    values.Pedido = PedidoProductos
+    console.log(values)
   }
+
   return (
     <section className="ViewSolicitarPedido" id="ViewPedidos">
       <p className="titulo-solicitud">Solicitud Pedido</p>
       <div className="box-column">
         <div>
           <p className="titulo-seccion">Datos Personales</p>
-          <div className="inputs-information">
-            <InputBoxData tituloInput={"Nombre"}></InputBoxData>
-            <InputBoxData tituloInput={"Apellidos"}></InputBoxData>
-            <InputBoxData tituloInput={"Numero Telefonico"}></InputBoxData>
-          </div>
-
+          <form id="form-informacion" onSubmit={EnviarPedido}>
+            <div className="inputs-information">
+              <InputBoxData tituloInput={"Nombre"}></InputBoxData>
+              <InputBoxData tituloInput={"Apellidos"}></InputBoxData>
+              <InputBoxData tituloInput={"Numero Telefonico"}></InputBoxData>
+            </div>
+          </form>
           {
             // Datos pedido
           }
@@ -122,12 +133,12 @@ const SolicitarPedido = () => {
                 dataOption={Presentaciones}
                 ModoRenderizado="2"
               ></SelectBoxData>
-              
+
               <SelectBoxData
                 tituloSelect={"Unidades"}
                 dataOption={[CantidadUnidad]}
                 ModoRenderizado="3"
-        ></SelectBoxData>
+              ></SelectBoxData>
             </div>
           </form>
           <div className="btns">
@@ -156,7 +167,9 @@ const SolicitarPedido = () => {
           <tbody>
             {PedidoProductos.map((producto) => (
               <tr>
-                <td>{producto.nombreProducto + " " + producto.nombreProducto}</td>
+                <td>
+                  {producto.nombreProducto + " " + producto.sabor}
+                </td>
                 <td>{producto.tamanio}</td>
                 <td>{producto.nombrePresentacion}</td>
                 <td>{producto.cantidadPresentacion}</td>
@@ -174,7 +187,7 @@ const SolicitarPedido = () => {
         </table>
       </section>
       <div className="box-btn-enviar">
-        <button className="btn-enviar">
+        <button className="btn-enviar"type="submit" form="form-informacion">
           Enviar
           <svg
             xmlns="http://www.w3.org/2000/svg"
