@@ -4,10 +4,23 @@ import anime from "animejs";
 import Carrusel from "./components/Carrusel";
 import SolicitarPedido from "./components/SolicitarPedido";
 function App() {
+  window.addEventListener("scroll", (event) => {
+  if( window.scrollY > 3){
+    anime({
+      targets : "#box-main",
+      scrollHeigth : 1550,
+      duration : 100
+    })
+  }
+  
+  });
+
+
   const MovimientoDesplazamiento = (Burbuja) => {
     let DivElementos = document.getElementsByClassName(Burbuja);
     DivElementos = Array.from(DivElementos);
-    DivElementos.map((DivElemento) => {
+    let CambiarPatron = Math.round(Math.random())
+    DivElementos.map((DivElemento, index) => {
       anime({
         /* targets : DivElemento,
            top : "0%",
@@ -20,7 +33,8 @@ function App() {
         direction: "normal",
         easing: "linear",
         complete: () => {
-          DivElemento.style.top = `${Math.random()  * (130 - 90) + 90}%`
+
+          DivElemento.style.top = (index % 2 == CambiarPatron ? "100%" : "120%")
           anime({
             targets: DivElemento,
             opacity: 1,
@@ -91,8 +105,9 @@ useEffect(() => {
           </ul>
         </nav>
       </header>
-      <main>
-        <div className="BackgroundDegradado"></div>
+      <main >
+      <div>
+      <div className="BackgroundDegradado"></div>
         <section className="Inicio" id="ViewInicio">
           <div className="InicioBoxLeft">
             <p className="Title">
@@ -116,49 +131,49 @@ useEffect(() => {
 <section className="animacionBox">
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+              style={{ top: `121%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+              style={{ top: `101%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+              style={{ top: `121%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+              style={{ top: `101%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 100) + 100}%` }}
+              style={{ top: `121%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 1030 + 100)}%` }}
+              style={{ top: `101%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 1030 + 100)}%` }}
+              style={{ top: `121%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja2"
-              style={{ top: `${Math.random() * (120 - 1030 + 100)}%` }}
+              style={{ top: `101%` }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
@@ -166,49 +181,49 @@ useEffect(() => {
           <section className="animacionBox">
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 0)}%` }}
+              style={{ top: "120%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 0)}%` }}
+              style={{ top: "100%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 0)}%` }}
+              style={{ top: "120%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 0)}%` }}
+              style={{ top: "100%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 0)}%` }}
+              style={{ top: "120%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 30)}%` }}
+              style={{ top: "100%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 30)}%` }}
+              style={{ top: "120%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
             <div
               className="Burbuja"
-              style={{ top: `${Math.random() * (100 - 30)}%` }}
+              style={{ top: "100%" }}
             >
               <div className="BrilloBurbuja"></div>
             </div>
@@ -223,6 +238,7 @@ useEffect(() => {
           Presentacion="355ml"
         ></Carrusel>
         <SolicitarPedido></SolicitarPedido>
+      </div>
       </main>
       <footer>
         <div className="box-footer-data">

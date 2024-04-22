@@ -2,7 +2,7 @@ import React from "react";
 import "./Carrusel.css"
 const Carrusel = ({Imagen, Nombre, Sabor, Descripcion, Pack, Presentacion}) => {
     return(
-        <section className='productos' id="ViewProductos">
+        <section className='productos' id="ViewProductos" style = {{zIndex : "2", backgroundColor: "white", position: "relative"}}>
           <div>
             <button className="btn-cambiar-productos">
               <img src="/btn_producto.svg" alt="" />
