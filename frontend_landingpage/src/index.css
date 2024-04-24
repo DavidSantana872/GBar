@@ -14,11 +14,14 @@
 body{
   border: solid violet 1px;
   flex: 1 0 auto;
+  overflow-x: hidden;
 }
 header{
   position: fixed;
   z-index: 10;
   width: 100%;
+  margin: 0px;
+  top: 0px;
 }
 #ViewInicio{
   padding-top: 64px;
@@ -26,4 +29,35 @@ header{
 a{
   text-decoration: none;
   color: var(--colorNegro);;
+}
+
+@media screen and (max-width: 1279px) {
+  *{
+
+  }
+  body{
+    width: 100vw;
+    background-color: rgb(255, 0, 0);
+  }
+  header{
+    width: 100%;
+    position: relative;
+    border: solid 1px white;
+  }
+  .BarraNavegacion{
+    width: 100%;
+    border: 1px green solid
+  }
+  .BarraNavegacion > ul{
+    border: solid 1px white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+  }
+  .BarraNavegacion > ul > li{
+    width: min-content;
+    border:  solid 1px black;
+    margin: 0px;
+
+  }
 }
