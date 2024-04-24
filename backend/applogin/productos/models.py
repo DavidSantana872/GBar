@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 # acciones
 class Gestion(models.Model):
@@ -20,7 +19,7 @@ class Gestion(models.Model):
         paquete.save()
         
     @staticmethod
-    def agregar_producto(nombre, tamanio, id_pack, sabor, cantidad_disponible, imagen):
+    def agregar_producto(nombre, tamanio, id_pack, sabor, cantidad_disponible, imagen, fecha_ingreso):
         # Crear una instancia del modelo Product con los datos proporcionados
         nuevo_producto = Product(
             NOMBRE = nombre,
@@ -28,7 +27,8 @@ class Gestion(models.Model):
             ID_PACK = id_pack,  # ID_PACK_id porque es una clave externa
             SABOR = sabor,
             CANTIDAD_DISPONIBLE = cantidad_disponible,
-            IMAGEN = imagen
+            IMAGEN = imagen,
+            FECHA_INGRESO = fecha_ingreso
         )
         # Guardar el nuevo producto en la db
         nuevo_producto.save()
@@ -62,4 +62,5 @@ class Product(models.Model):
     SABOR = models.CharField(max_length = 30)
     CANTIDAD_DISPONIBLE = models.PositiveBigIntegerField()
     IMAGEN = models.ImageField(upload_to= "image/")
+    FECHA_ENTRADA = models.DateTimeField(auto_created=True)
     accion = Gestion()

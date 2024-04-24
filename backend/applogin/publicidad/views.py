@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from .models import Promocion, Gestion
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
+from datetime import *
 # Create your views here.
 class Publicidad(APIView):
     def get(self, request):
@@ -10,7 +11,18 @@ class Publicidad(APIView):
             list_data = []
             for dato in objeto:
                 temporal = model_to_dict(dato)
-                list_data.append(temporal)
+                
+                string_fecha = str(temporal["FECHA_FIN"]).split("-")
+
+                fecha_producto_seleccionado = date(int(string_fecha[0]), int(string_fecha[1]), int(string_fecha[2]))
+
+               
+                fecha_actual = date.today()
+
+                if(fecha_producto_seleccionado > fecha_actual):
+                    
+                    list_data.append(temporal)
+
         except Exception as e:
             return(
                 JsonResponse(

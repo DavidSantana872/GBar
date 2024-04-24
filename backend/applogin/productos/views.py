@@ -4,7 +4,7 @@ from .models import Product, Pack
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.core.exceptions import ObjectDoesNotExist
-
+from datetime import datetime
 
 # Create your views here.
 class Productos(APIView):
@@ -15,9 +15,14 @@ class Productos(APIView):
             for product in objeto:
                 product_dict = model_to_dict(product)
                 # Si el campo de imagen no está vacío, obtenemos la URL de la imagen
+                datos_paquete = model_to_dict(Pack.objects.get(pk = product_dict["ID_PACK"]))
+
+                product_dict["Empaquetado"] = datos_paquete
+
                 if product.IMAGEN:
                     product_dict['IMAGEN'] = product.IMAGEN.url
                 data.append(product_dict)
+                
         # Convertir a JSON
         except Exception as e:
             return JsonResponse(
@@ -37,7 +42,8 @@ class Productos(APIView):
                 request.data.get("ID_PACK"),
                 request.data.get("SABOR"),
                 request.data.get("CANTIDAD_DISPONIBLE"),
-                request.data.get("IMAGEN")
+                request.data.get("IMAGEN"),
+                datetime.now()
             )
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
