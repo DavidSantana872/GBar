@@ -10,13 +10,13 @@ class Publicidad(APIView):
             objeto  = Promocion.objects.all()
             list_data = []
             for dato in objeto:
+                
                 temporal = model_to_dict(dato)
                 
                 string_fecha = str(temporal["FECHA_FIN"]).split("-")
 
                 fecha_producto_seleccionado = date(int(string_fecha[0]), int(string_fecha[1]), int(string_fecha[2]))
 
-               
                 fecha_actual = date.today()
 
                 if(fecha_producto_seleccionado > fecha_actual):
